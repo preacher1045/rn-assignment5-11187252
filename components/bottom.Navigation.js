@@ -11,7 +11,7 @@ const BottomNavigation = () => {
     const getColor = (page) => (route.name === page ? 'blue' : '#818182');
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{ backgroundColor: theme.colors.navBackground }]}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Image source={require('../assets/home.png')} style={styles.navIcon}/>
                 <Text style={{ color: getColor('Home') }}>Home</Text>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         padding: 10,
-        marginVertical: 10
+        marginVertical: 2
     },
     navIcon: {
         alignSelf: 'center',

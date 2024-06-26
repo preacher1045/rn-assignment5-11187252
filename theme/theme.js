@@ -7,7 +7,9 @@ const themes = {
         dark: false,
         colors: {
             background: '#fff',
-            text: '#000'
+            text: '#000',
+            navBackground: '#ffffff', 
+            imageBackground: '#8d8f99'
         }
         
     },
@@ -15,7 +17,9 @@ const themes = {
         dark: true,
         colors: {
             background: '#161e2b',
-            text: '#fff'
+            text: '#fff',
+            navBackground: '#0d1533', 
+            imageBackground: '#545a73'
         }
     },
 };

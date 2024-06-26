@@ -1,9 +1,27 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import { ThemeContext } from '../theme/theme';
+import transaction from "../constants/data";
 
 const Home = ({ navigation }) => {
     const { theme } = useContext(ThemeContext);
+
+    const renderItems = ({ item }) => (
+        <View style={styles.popularcard}>
+            <View style={[styles.background,{ backgroundColor: theme.colors.imageBackground }]}>
+                <Image source={item.image} style={styles.logo} />
+            </View>
+        <View style={styles.flexInfo}>
+            <View style={styles.textInfo}>
+                <Text style={[styles.headerText, { color: theme.colors.text }]}>{item.company}</Text>
+                <Text style={styles.subText}>{item.category}</Text>
+            </View>
+            <View style={styles.popularInfo}>
+                <Text style={[styles.salaryText, { color: theme.colors.text }]}>{item.transaction}</Text>
+            </View>
+        </View>
+    </View>
+    );
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
@@ -12,7 +30,7 @@ const Home = ({ navigation }) => {
                 <View style={styles.profileFlex}>
                     <Image source={require('../assets/profile.png')} style={styles.profileImage}/>
                     <View>
-                        <Text style={styles.headerText}>Welcome Back</Text>
+                        <Text style={styles.headText}>Welcome Back</Text>
                         <Text style={[styles.subText, { color: theme.colors.text }]}>Eric Atsu</Text>
                     </View>
                 </View>
@@ -59,13 +77,14 @@ const Home = ({ navigation }) => {
                     <Text style={styles.subText}>See All</Text>
                 </View>
 
-                {/* <FlatList
-                data={transactions}
-                renderItem={rendertransactions}
-                keyExtractor={item => item.toString()}
+                <FlatList
+                data={transaction}
+                renderItem={renderItems}
+                keyExtractor={item => item.id.toString()}
                 horizontal={false}
                 showsVerticalScrollIndicator={false}
-                /> */}
+
+                />
             </View>
         </View>
     );
@@ -76,7 +95,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         marginVertical: 60,
-        marginHorizontal: 20
+        marginHorizontal: 20,
+        paddingBottom: 450
     },
     profileHeader: {
         flexDirection: 'row',
@@ -90,8 +110,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 20
     },
-    headerText: {
-        color: '#818182'
+    headText: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: '#95969D',
     },
     subText: {
         fontSize: 20,
@@ -131,7 +153,75 @@ const styles = StyleSheet.create({
     centerIcon: {
         alignSelf: 'center',
         marginVertical: 15
-    }
+    },
+    flexItems: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        padding: 10,
+        marginBottom: 10,
+    },
+    flexItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: 120
+    },
+    popularcard: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        borderRadius: 12,
+        padding: 10,
+        marginBottom: 10,
+        gap: 17
+    },
+    logo: {
+        width: 20,
+        height: 20,
+        // marginRight: 10,
+        marginTop: 10,
+        alignSelf: 'center',
+        paddingVertical: 10
+    },
+    flexInfo: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flex: 1,
+    },
+    textInfo: {
+        flexDirection: 'column',
+    },
+    headerText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#000',
+    },
+    subText: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: '#95969D',
+    },
+    popularInfo: {
+        alignItems: 'flex-end',
+    },
+    salaryText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#000',
+    },
+    listContentContainer: {
+        paddingBottom: 100, 
+    },
+
+    background: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+    },
 });
 
 export default Home;
